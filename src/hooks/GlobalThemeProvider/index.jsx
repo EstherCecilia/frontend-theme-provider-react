@@ -34,7 +34,8 @@ export const CustomThemeProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    const subDomain = window.location.href; //Pega subdominio
+    //const subDomain = window.location.href; //Pega subdominio
+    const subDomain = "u4c";
 
     if (domain !== subDomain) {
       setDomain(subDomain);
