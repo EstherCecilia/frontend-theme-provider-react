@@ -34,8 +34,13 @@ const themes = [
 export const getTheme = async (domain) => {
   await freeze();
 
+  const defaultTheme = {
+    ...defaultStyle,
+    default: false,
+  };
+
   if (domain) {
-    return themes.find((theme) => theme.name === domain) || defaultStyle;
+    return themes.find((theme) => theme.name === domain) || defaultTheme;
   }
 
   return undefined;
