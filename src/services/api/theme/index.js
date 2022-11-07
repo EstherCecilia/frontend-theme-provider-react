@@ -1,4 +1,4 @@
-import { default_style } from "../../../constants/defaultProfile";
+import { defaultStyle } from "../../../constants/defaultProfile";
 import { freeze } from "../../../utils/freeze";
 
 const themes = [
@@ -35,7 +35,7 @@ export const getTheme = async (domain) => {
   await freeze();
 
   if (domain) {
-    return themes.find((theme) => theme.name === domain) || default_style;
+    return themes.find((theme) => theme.name === domain) || defaultStyle;
   }
 
   return undefined;

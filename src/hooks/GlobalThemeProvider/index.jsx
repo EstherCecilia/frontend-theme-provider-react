@@ -1,6 +1,6 @@
 import React, { useEffect, createContext, useContext, useState } from "react";
 import { ThemeProvider } from "styled-components";
-import { default_style } from "../../constants/defaultProfile";
+import { defaultStyle } from "../../constants/defaultProfile";
 import { getTheme } from "../../services/api/theme";
 
 const ThemeContext = createContext();
@@ -8,7 +8,7 @@ const ThemeContext = createContext();
 export const useTheme = () => useContext(ThemeContext);
 
 export const CustomThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(default_style);
+  const [theme, setTheme] = useState(defaultStyle);
   const [domain, setDomain] = useState("");
 
   const handleTheme = async (subDomain) => {
@@ -20,7 +20,7 @@ export const CustomThemeProvider = ({ children }) => {
     if (localTheme) {
       setTheme(JSON.parse(localTheme));
     } else {
-      setTheme(default_style); // É uma opção que o back trate o valor default
+      setTheme(defaultStyle); // É uma opção que o back trate o valor default
     }
   };
 
