@@ -5,31 +5,28 @@ import { getTheme } from "../../services/api/theme";
 
 const ThemeContext = createContext();
 
+const getLocalTheme = () => {
+  const localTheme = localStorage.getItem("customerProfile");
+
+  if (localTheme) {
+    return JSON.parse(localTheme);
+  } else {
+    return defaultStyle;
+  }
+};
 export const useTheme = () => useContext(ThemeContext);
 
 export const CustomThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(() => {
-    const localTheme = localStorage.getItem("customerProfile");
-
-    if (localTheme) {
-      return JSON.parse(localTheme);
-    } else {
-      return defaultStyle;
-    }
-  });
+  const [theme, setTheme] = useState(() => getLocalTheme());
   const [domain, setDomain] = useState("");
 
   const handleTheme = async (subDomain) => {
     const customerProfile = await getTheme(subDomain);
     localStorage.setItem("customerProfile", JSON.stringify(customerProfile));
 
-    const localTheme = localStorage.getItem("customerProfile");
+    const localTheme = getLocalTheme();
 
-    if (localTheme) {
-      setTheme(JSON.parse(localTheme));
-    } else {
-      setTheme(defaultStyle); // É uma opção que o back trate o valor default
-    }
+    setTheme(localTheme);
   };
 
   useEffect(() => {
