@@ -8,7 +8,15 @@ const ThemeContext = createContext();
 export const useTheme = () => useContext(ThemeContext);
 
 export const CustomThemeProvider = ({ children }) => {
-  const [theme, setTheme] = useState(defaultStyle);
+  const [theme, setTheme] = useState(() => {
+    const localTheme = localStorage.getItem("customerProfile");
+
+    if (localTheme) {
+      return JSON.parse(localTheme);
+    } else {
+      return defaultStyle;
+    }
+  });
   const [domain, setDomain] = useState("");
 
   const handleTheme = async (subDomain) => {
